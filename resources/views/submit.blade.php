@@ -61,6 +61,7 @@
             <div class="mb-3">
                 <h5><label for="researches" class="form-label">Research Interests:</label></h5>
                 <select name="researches[]" multiple class="form-control">
+                    
                     @foreach($researches as $research)
                         <option value="{{ $research->id }}">{{ $research->name }}</option>
                     @endforeach
