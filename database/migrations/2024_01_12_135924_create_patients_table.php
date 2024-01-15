@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('id_number');
             $table->string('phone');
-            $table->string('research');
+            $table->json('research_interests');
             $table->timestamps();
         });
     }
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('patients');
+        Schema::dropIfExists('patients'); 
     }
 };

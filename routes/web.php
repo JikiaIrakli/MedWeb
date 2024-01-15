@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthManager;
+use App\Http\Controllers\SubmitController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,7 +26,7 @@ Route::get('/logout', [AuthManager::class,'logout']) -> name('logout');
 
 Route::group(['middleware'=> ['auth']], function () {
     Route::get('/profile', [AuthManager::class,'profile']) -> name('profile');
-    Route::get('/submit', [AuthManager::class,'submit']) -> name('submit');
-    Route::post('/submit', [AuthManager::class,'submitPost']) -> name('submit.post');
+    Route::get('/submit', [SubmitController::class,'submit']) -> name('submit');
+    Route::post('/submit', [SubmitController::class,'submitPost']) -> name('submit.post');
     
 });

@@ -1,6 +1,11 @@
 @extends('layout')
 @section('title', 'Submit Patient')
 @section('content')
+@php
+    
+    $researches = \App\Models\Research::all();
+    //dd($researches->toArray());
+@endphp
 
 <div class="container">
 
@@ -45,7 +50,7 @@
         @csrf
         <div class="col-md-auto">
             <h4>Fill The Form: </h4>
-
+    
             <div class="mb-3">
                 <h5><label for="name" class="form-label">Full Name:</label></h5>
                 <input type="name" class="form-control" name="name">
@@ -60,15 +65,13 @@
             </div>
             <div class="mb-3">
                 <h5><label for="researches" class="form-label">Research Interests:</label></h5>
-                <select name="researches[]" multiple class="form-control">
-                    
+                <select data-placeholder="Researches..." multiple class="chosen-select" name="research_interests[]" tabindex="4">
                     @foreach($researches as $research)
                         <option value="{{ $research->id }}">{{ $research->name }}</option>
                     @endforeach
-                    
                 </select>
             </div>
-
+    
             <button type="submit" class="button-29">Submit!</button>
         </div>
     </form>

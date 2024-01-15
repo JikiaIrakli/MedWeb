@@ -23,7 +23,7 @@ class Patients extends Authenticatable
         'name',
         'id_number',
         'phone',
-        'research',
+        'research_interests',
     ];
 
     /**
