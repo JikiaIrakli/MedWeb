@@ -29,9 +29,12 @@ class SubmitController extends Controller
         $data['name'] = $request->name;
         $data['id_number'] = $request->id_number;
         $data['phone'] = $request->phone;
-        $data['research_interests'] = json_encode($request->research_interests);
+        $data['research_interests'] = $request->research_interests ? json_encode($this->getResearchNames($request->research_interests), JSON_UNESCAPED_UNICODE) : null;
+
 
         $isPatient = Patients::where('id_number', $request->id_number)->first();
+
+         
 
         if ($isPatient) {
             return redirect(route('submit'))->with('error', 'Submission Failed: Patient with ID number ' . $request->id_number . ' already exists. Researches: ' . json_encode($request->research_interests));
@@ -45,5 +48,19 @@ class SubmitController extends Controller
         }
 
         return redirect(route('home'))->with('success', 'REGISTERED!!!')->with('patient', $patient);
+    }
+
+    private function getResearchNames($researchIds)
+    {
+        $researchNames = [];
+
+        foreach ($researchIds as $researchId) {
+            $research = Research::find($researchId);
+            if ($research) {
+                $researchNames[] = $research->name;
+            }
+        }
+
+        return $researchNames;
     }
 }
